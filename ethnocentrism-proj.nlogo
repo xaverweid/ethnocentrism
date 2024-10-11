@@ -240,11 +240,11 @@ end
 GRAPHICS-WINDOW
 210
 10
-647
-448
+977
+778
 -1
 -1
-13.0
+23.0
 1
 10
 1
@@ -265,54 +265,54 @@ ticks
 30.0
 
 SLIDER
-11
+13
 10
-203
+202
 43
 num-agents
 num-agents
 0
-20
-20.0
+50
+28.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-10
+13
 49
-203
+202
 82
 minority-proportion
 minority-proportion
 0
-1
-0.15
+0.49
+0.19
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-10
+12
 106
-200
+202
 139
 init-likeness-ingroup
 init-likeness-ingroup
 0
 1
-0.2
+1.0
 0.1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-10
+12
 150
-200
+202
 183
 init-likeness-outgroup
 init-likeness-outgroup
@@ -325,9 +325,9 @@ NIL
 HORIZONTAL
 
 BUTTON
-11
+13
 322
-77
+103
 355
 NIL
 setup
@@ -342,9 +342,9 @@ NIL
 1
 
 SLIDER
-11
+13
 227
-197
+201
 260
 num-links
 num-links
@@ -357,9 +357,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-11
+13
 268
-195
+201
 301
 rewire-prop
 rewire-prop
@@ -372,42 +372,12 @@ NIL
 HORIZONTAL
 
 SLIDER
-652
+985
 10
-824
+1157
 43
 gamma
 gamma
-0
-20
-2.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-652
-48
-824
-81
-beta
-beta
-0
-1
-0.006
-0.001
-1
-NIL
-HORIZONTAL
-
-SLIDER
-653
-87
-825
-120
-W
-W
 0
 20
 1.0
@@ -416,11 +386,41 @@ W
 NIL
 HORIZONTAL
 
+SLIDER
+985
+48
+1157
+81
+beta
+beta
+0
+0.01
+0.002
+0.001
+1
+NIL
+HORIZONTAL
+
+SLIDER
+985
+87
+1157
+120
+W
+W
+0
+20
+10.0
+1
+1
+NIL
+HORIZONTAL
+
 BUTTON
-126
-324
-189
-357
+120
+322
+200
+355
 NIL
 go
 T
@@ -432,6 +432,55 @@ NIL
 NIL
 NIL
 1
+
+TEXTBOX
+15
+200
+165
+218
+Small World Network
+11
+0.0
+1
+
+PLOT
+986
+133
+1229
+283
+Link Number
+NIL
+NIL
+0.0
+10.0
+0.0
+50.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot count links"
+
+PLOT
+986
+294
+1229
+444
+Strategies
+NIL
+NIL
+0.0
+10.0
+0.0
+50.0
+true
+true
+"" ""
+PENS
+"altruist" 1.0 0 -13840069 true "" "plot count turtles with [strategies = [\"C\" \"C\"]]"
+"ethonocentric" 1.0 0 -1184463 true "" "plot count turtles with [strategies = [\"C\" \"D\"]]"
+"cosmopolitan" 1.0 0 -11221820 true "" "plot count turtles with [strategies = [\"D\" \"C\"]]"
+"egoist" 1.0 0 -955883 true "" "plot count turtles with [strategies = [\"D\" \"D\"]]"
 
 @#$#@#$#@
 ## WHAT IS IT?
