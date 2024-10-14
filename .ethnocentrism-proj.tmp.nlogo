@@ -547,7 +547,7 @@ Small World Network
 PLOT
 986
 133
-1311
+1475
 397
 Had-game Proportion in All Links
 NIL
