@@ -272,8 +272,8 @@ SLIDER
 num-agents
 num-agents
 0
-50
-28.0
+500
+100.0
 1
 1
 NIL
@@ -288,7 +288,7 @@ minority-proportion
 minority-proportion
 0
 0.49
-0.19
+0.1
 0.01
 1
 NIL
@@ -303,7 +303,7 @@ init-likeness-ingroup
 init-likeness-ingroup
 0
 1
-1.0
+0.1
 0.1
 1
 NIL
@@ -318,7 +318,7 @@ init-likeness-outgroup
 init-likeness-outgroup
 0
 1
-0.0
+0.7
 0.1
 1
 NIL
@@ -350,7 +350,7 @@ num-links
 num-links
 0
 5
-4.0
+2.0
 1
 1
 NIL
@@ -365,7 +365,7 @@ rewire-prop
 rewire-prop
 0
 1
-0.5
+0.2
 0.1
 1
 NIL
@@ -410,7 +410,7 @@ W
 W
 0
 20
-10.0
+15.0
 1
 1
 NIL
@@ -446,7 +446,7 @@ Small World Network
 PLOT
 986
 133
-1229
+1475
 283
 Link Number
 NIL
@@ -464,8 +464,8 @@ PENS
 PLOT
 986
 294
-1229
-444
+1476
+647
 Strategies
 NIL
 NIL
