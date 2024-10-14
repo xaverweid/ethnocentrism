@@ -591,10 +591,11 @@ true
 true
 "" ""
 PENS
-"altruist" 1.0 0 -13840069 true "" "plot (count turtles with [type-agent = \"Altruist\"])"
-"ethonocentric" 1.0 0 -1184463 true "" "plot (count turtles with [type-agent = \"Ethonocentrist\"])"
-"cosmopolitan" 1.0 0 -11221820 true "" "plot (count turtles with [type-agent = \"Cosmopolitan\"])"
-"egoist" 1.0 0 -955883 true "" "plot (count turtles with [type-agent = \"Egoist\"])"
+"Altruist" 1.0 0 -13840069 true "" "plot (count turtles with [type-agent = \"Altruist\"])"
+"Ethonocentrist" 1.0 0 -1184463 true "" "plot (count turtles with [type-agent = \"Ethnocentrist\"])"
+"Cosmopolitan" 1.0 0 -11221820 true "" "plot (count turtles with [type-agent = \"Cosmopolitan\"])"
+"Egoist" 1.0 0 -955883 true "" "plot (count turtles with [type-agent = \"Egoist\"])"
+"Undefined" 1.0 0 -7500403 true "" "plot (count turtles with [type-agent = \"Undefined\"])"
 
 @#$#@#$#@
 ## WHAT IS IT?
