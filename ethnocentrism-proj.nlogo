@@ -1,5 +1,4 @@
 ;; Build up the model according to the settings of Experiment 1
-;; TODO-20241010: Try other settings
 globals [
   n-groups
 ]
@@ -9,6 +8,7 @@ turtles-own [
   tag
   tag-ind
   likeness
+  ;; TODO-20241014: Add new strategies
   strategies
   communality
 ]
@@ -17,7 +17,7 @@ turtles-own [
 links-own [
   ;; The links should store the previous outcomes of previous PD game
   ;; It should be noted that if the link is undirected, end1 is always the older of the two turtles, that is, the turtle with the smaller who number.
-  ;; TODO-20241010: Try to store more of the PD game outcome
+  ;; TODO-20241014: Try to store more of the PD game outcome
   had-game? ; record if two turtles had PD game last round
   used-strategies ; the strategies both ends used last round
 ]
@@ -27,7 +27,6 @@ to setup
   clear-all
 
   ;; Create turtles (agents) with 2 tags: majority (blue) and minority (green)
-  ;; TODO-20241010: Try create more than 2 groups. Proportions need to be specified
   set n-groups 2
 
   crt num-agents [
@@ -64,7 +63,6 @@ to setup
   arrange-turtles
 
   ;; Link turtles using small-world network setting
-  ;; TODO-20241010: Try different network settings such as random, preferential attachment, or fully connection
   let max-who 1 + max [who] of turtles
   let sorted sort ([who] of turtles)
   foreach sorted[ [?1] ->
@@ -101,6 +99,7 @@ to go
     let gamer1 turtle (item 1 gamers)
 
     ;; Determine game initialisation based on reciprocal likeness
+    ;; TODO-20241014: plot interaction number and percentage
     let likeness01 item ([tag-ind] of gamer1) ([likeness] of gamer0)
     let likeness10 item ([tag-ind] of gamer0) ([likeness] of gamer1)
     ifelse (random-float 1 < min list likeness01 likeness10)[
