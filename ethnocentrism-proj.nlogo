@@ -101,7 +101,7 @@ end
 
 to go
   ;; Prisoner's Dilemma game
-  ask links [
+  ask links with [hidden? = false] [
     let gamers sort [who] of both-ends
     let gamer0 turtle (item 0 gamers)
     let gamer1 turtle (item 1 gamers)
@@ -146,33 +146,45 @@ to go
     ifelse (random 20 < W)[
       ;; Revise links
       ;; Check if any neighbor has more than 1 neighbor, choose revisee
-      if (any? link-neighbors with [count link-neighbors > 1])[
-        let who-revisee [who] of one-of link-neighbors with [count link-neighbors > 1]
+      let potential-revisee link-neighbors with [
+        ([hidden?] of link-with myself = false) and count (link-neighbors with [hidden? = false]) >= 2
+      ]
+      if (any? potential-revisee)[
+        let who-revisee [who] of one-of potential-revisee
         let communality-revisee [communality] of turtle who-revisee
 
         ;; Revise probability
         if (random-float 1 < 1 / (1 + exp (beta * (communality-revisee - communality))))[
           ;; Cut link
           if (cut-link (min list who who-revisee) (max list who who-revisee))[
-            ask link (min list who who-revisee) (max list who who-revisee) [die]
+            ask link (min list who who-revisee) (max list who who-revisee) [
+              hide-link
+              set had-game? false
+            ]
 
             ;; Form new link
-            let potential-new-neighbors turtles with [self != myself and not link-neighbor? myself and link-neighbor? turtle who-revisee]
+            let potential-new-neighbors turtles with [
+              self != myself and (not link-neighbor? myself or [hidden?] of link-with myself = true) and (link-neighbor? turtle who-revisee and [hidden?] of link-with turtle who-revisee = true)
+            ]
             if any? potential-new-neighbors [
                 let new-link-neighbor one-of potential-new-neighbors
+                ifelse (link-with new-link-neighbor != nobody)[
+                ask link-with new-link-neighbor [show-link]
+              ][
                 create-link-with new-link-neighbor
                 ask link-with new-link-neighbor [
                   set had-game? false
                   set used-actions0 []
                   set used-actions1 []
                 ]
+              ]
              ]
           ]
         ]
       ]
     ][
       ;; Revise strategies
-      if (any? my-links with [had-game? = true])[
+      if (any? my-links with [had-game? = true and hidden? = false])[
         let links-revisee-potential my-links with [had-game? = true]
 
         ;; Find the neighbor that have the maximum number of neighbors
@@ -182,7 +194,7 @@ to go
 
         ask links-revisee-potential [
           let linked-turtle other-end
-          let neighbor-count count [link-neighbors] of linked-turtle
+          let neighbor-count count ([link-neighbors] of linked-turtle) with [hidden? = false]
           if (neighbor-count > max-neighbor-count) [
             set max-neighbor-count neighbor-count
             set strategy-revisee linked-turtle
@@ -224,7 +236,6 @@ to go
     ]
     set type-agent determine-type coop-in coop-out def-in def-out
   ]
-
 
   tick
 
@@ -404,7 +415,7 @@ init-likeness-ingroup
 init-likeness-ingroup
 0
 1
-0.3
+0.5
 0.1
 1
 NIL
@@ -419,7 +430,7 @@ init-likeness-outgroup
 init-likeness-outgroup
 0
 1
-0.8
+0.5
 0.1
 1
 NIL
@@ -481,7 +492,7 @@ gamma
 gamma
 0
 20
-3.0
+20.0
 1
 1
 NIL
@@ -560,9 +571,9 @@ true
 true
 "" ""
 PENS
-"Both" 1.0 0 -7500403 true "" "plot (count links with [had-game? = true]) / count links"
-"Inter-group" 1.0 0 -8990512 true "" "plot (count links with [[tag-ind] of end1 != [tag-ind] of end2 and had-game? = true]) / count links"
-"Intra-group" 1.0 0 -1664597 true "" "plot (count links with [[tag-ind] of end1 = [tag-ind] of end2 and had-game? = true]) / count links"
+"Both" 1.0 0 -7500403 true "" "plot (count links with [had-game? = true and hidden? = false]) / count links with [hidden? = false]"
+"Inter-group" 1.0 0 -8990512 true "" "plot (count links with [[tag-ind] of end1 != [tag-ind] of end2 and had-game? = true and hidden? = false]) / count links with [hidden? = false]"
+"Intra-group" 1.0 0 -1664597 true "" "plot (count links with [[tag-ind] of end1 = [tag-ind] of end2 and had-game? = true and hidden? = false]) / count links with [hidden? = false]"
 
 PLOT
 986
