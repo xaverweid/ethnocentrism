@@ -47,9 +47,10 @@ to setup
     ;; Initialise the likeness list based on in-group and out-group likeness
     let likeness-list []
     repeat n-groups [
-      set likeness-list lput init-likeness-outgroup likeness-list
+      set likeness-list lput likeness-outgroup likeness-list
     ]
-    set likeness replace-item tag-ind likeness-list init-likeness-ingroup
+    set likeness replace-item tag-ind likeness-list likeness-ingroup
+
 
     ;; Initialise strategies randomly for each group
     let strategy-list []
@@ -237,9 +238,32 @@ to go
     set type-agent determine-type coop-in coop-out def-in def-out
   ]
 
+  ;; Update likeness-outgroup and likeness-ingroup slider to our agents
+
+  ask turtles[
+      ;; Check if the turtle is in the minority group
+    if tag = "minority" [
+      set likeness replace-item 1 likeness (likeness-outgroup)
+      set likeness replace-item 0 likeness (likeness-ingroup)
+    ]
+
+    ;; Check if the turtle is in the majority group
+    if tag = "majority" [
+      set likeness replace-item 0 likeness (likeness-outgroup)
+      set likeness replace-item 1 likeness (likeness-ingroup)
+      ]
+    ]
+
   tick
 
 end
+
+
+;;Perturbation Functions, potentially for:
+;; 1) Adding new random links between random in-group and out-group members
+;; 2) Increase Likeness for likeness-outgroup (The two groups like each other more, 0.1 increase?)
+;; 3) Decrease Likeness for likeness-ingroup (The two groups hate each other more, 0.1 decrease?)
+
 
 
 to-report get-action [strategy used-actions]
@@ -385,7 +409,7 @@ num-agents
 num-agents
 0
 500
-100.0
+43.0
 1
 1
 NIL
@@ -406,41 +430,11 @@ minority-proportion
 NIL
 HORIZONTAL
 
-SLIDER
-12
-106
-202
-139
-init-likeness-ingroup
-init-likeness-ingroup
-0
-1
-0.5
-0.1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-12
-150
-202
-183
-init-likeness-outgroup
-init-likeness-outgroup
-0
-1
-0.5
-0.1
-1
-NIL
-HORIZONTAL
-
 BUTTON
 13
-322
+343
 103
-355
+376
 NIL
 setup
 NIL
@@ -455,14 +449,14 @@ NIL
 
 SLIDER
 13
-227
+248
 201
-260
+281
 num-links
 num-links
 0
 5
-2.0
+1.0
 1
 1
 NIL
@@ -470,14 +464,14 @@ HORIZONTAL
 
 SLIDER
 13
-268
+289
 201
-301
+322
 rewire-prop
 rewire-prop
 0
 1
-0.2
+0.5
 0.1
 1
 NIL
@@ -530,9 +524,9 @@ HORIZONTAL
 
 BUTTON
 120
-322
+343
 200
-355
+376
 NIL
 go
 T
@@ -546,10 +540,10 @@ NIL
 1
 
 TEXTBOX
-15
-200
-165
-218
+21
+229
+171
+247
 Small World Network
 11
 0.0
@@ -596,6 +590,46 @@ PENS
 "Cosmopolitan" 1.0 0 -11221820 true "" "plot (count turtles with [type-agent = \"Cosmopolitan\"])"
 "Egoist" 1.0 0 -955883 true "" "plot (count turtles with [type-agent = \"Egoist\"])"
 "Undefined" 1.0 0 -7500403 true "" "plot (count turtles with [type-agent = \"Undefined\"])"
+
+SLIDER
+12
+174
+202
+207
+likeness-outgroup
+likeness-outgroup
+0
+1
+0.4
+0.1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+13
+130
+202
+163
+likeness-ingroup
+likeness-ingroup
+0
+1
+0.6
+0.1
+1
+NIL
+HORIZONTAL
+
+TEXTBOX
+15
+98
+165
+126
+Likeness-in/outgroup can be modified while running
+11
+0.0
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
